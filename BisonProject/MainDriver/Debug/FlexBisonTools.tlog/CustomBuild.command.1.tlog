@@ -1,0 +1,4 @@
+^C:\USERS\SOPHI\DOWNLOADS\PROJECT3\PROJECT3\BISONPROJECT\MAINDRIVER\TIGER.LL
+..\..\win_flex_bison-latest\win_flex  tiger.ll
+^C:\USERS\SOPHI\DOWNLOADS\PROJECT3\PROJECT3\BISONPROJECT\MAINDRIVER\TIGER.YY
+..\..\win_flex_bison-latest\win_bison  -d tiger.yy
