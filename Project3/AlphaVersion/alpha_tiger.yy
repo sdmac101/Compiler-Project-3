@@ -33,9 +33,9 @@ void yyerror(char *s);	//called by the parser whenever an eror occurs
   FUNCTION VAR TYPE 
 
 /* add your own predence level of operators here */
-%left ASSIGN
-%left AND OR
-%left EQ NEQ GT LT GE LE 
+%nonassoc ASSIGN
+%nonassoc AND OR
+%nonassoc EQ NEQ GT LT GE LE 
 %left PLUS MINUS
 %left TIMES DIVIDE
 %left UMINUS
@@ -80,6 +80,7 @@ exp		:	STRING
 		|	FOR ID ASSIGN exp TO exp DO exp
 		|	BREAK
 		|	LET declaration-list IN exp-seq END
+		|	error
 		;
 
 exp-seq	:	exp
@@ -92,6 +93,7 @@ exp-list	:	exp
 
 lval	:	ID
 		|	lval LBRACK exp RBRACK
+		|	ID LBRACK exp RBRACK
 		;
 
 declaration-list	:	declaration

@@ -20,7 +20,7 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.2
 C:\Users\sophi\Downloads\testProj3\Project3\BisonProject\MainDriver\lex.yy.cc(86): message : see previous definition of 'UINT32_MAX'
 C:\Users\sophi\Downloads\testProj3\Project3\BisonProject\MainDriver\lex.yy.cc(1320,21): warning C4244: 'return': conversion from 'std::streamsize' to 'int', possible loss of data
   tiger.tab.cc
-C:\Users\sophi\Downloads\testProj3\Project3\BisonProject\MainDriver\tiger.tab.cc(922,5): warning C4065: switch statement contains 'default' but no 'case' labels
-C:\Users\sophi\Downloads\testProj3\Project3\BisonProject\MainDriver\tiger.tab.cc(1323,5): warning C4065: switch statement contains 'default' but no 'case' labels
-C:\Users\sophi\Downloads\testProj3\Project3\BisonProject\MainDriver\tiger.tab.cc(1636,5): warning C4065: switch statement contains 'default' but no 'case' labels
+C:\Users\sophi\Downloads\testProj3\Project3\BisonProject\MainDriver\tiger.tab.cc(924,5): warning C4065: switch statement contains 'default' but no 'case' labels
+C:\Users\sophi\Downloads\testProj3\Project3\BisonProject\MainDriver\tiger.tab.cc(1325,5): warning C4065: switch statement contains 'default' but no 'case' labels
+C:\Users\sophi\Downloads\testProj3\Project3\BisonProject\MainDriver\tiger.tab.cc(1638,5): warning C4065: switch statement contains 'default' but no 'case' labels
   MainDriver.vcxproj -> C:\Users\sophi\Downloads\testProj3\Project3\BisonProject\Debug\MainDriver.exe
