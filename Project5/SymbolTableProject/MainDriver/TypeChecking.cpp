@@ -1,3 +1,10 @@
+/* Ruj Haan
+ * TypeChecking.cpp
+ * 4/7/21
+ * Dr. Zhijiang Dong
+ */
+
+
 #include <sstream>
 #include "TypeChecking.h"
 #include "Absyn.h"
@@ -131,12 +138,29 @@ namespace semantics
 	const types::Type* TypeChecking::visit(const SimpleVar *v)
 	{
 		/* check if the variable is defined by looking up the symbol table*/
+		string info;
+		stringstream stream(info);
+		string myName = v->getName();
+
+		if (env.getVarEnv()->contains(myName)) {
+			stream << "undefined variable";
+			error(v, stream.str());
+		}
 		return NULL;
 	}
 
 	const types::Type* TypeChecking::visit(const SubscriptVar *v)
 	{
 		/* check both the variable and index */
+		const Var* var = v->getVar();
+
+		if (var != NULL)
+			visit(var);
+
+		const Exp* index = v->getIndex();
+
+		if (index != NULL)
+			visit(index);
 		return NULL;
 	}
 
@@ -145,12 +169,23 @@ namespace semantics
 	const types::Type* TypeChecking::visit(const OpExp *e)
 	{
 		/* check both operands */
+		const Exp* l = e->getLeft();
+		const Exp* r = e->getRight();
+
+		if (l != NULL)
+			visit(l);
+		if (r != NULL)
+			visit(r);
 		return NULL;
 	}
 
 	const types::Type* TypeChecking::visit(const VarExp *e)
 	{
 		/* check the variable */
+		const Var* variable = e->getVar();
+
+		if (variable != NULL)
+			visit(variable);
 		return NULL;
 	}
 
@@ -178,30 +213,88 @@ namespace semantics
 			step 1: check the function name
 			step 2: check every argument expression
 		*/
+		string myName = e->getFunc();
+		string x;
+		stringstream stream(x);
+
+		if (!(env.getVarEnv()->contains(myName))) {
+			stream << "undefined function name";
+			error(e, stream.str());
+		}
+
+		const ExpList* args = e->getArgs();
+
+		while (args != NULL) {
+			const Exp* head = args->getHead();
+			if (head != NULL)
+				visit(head);
+			args = args->getRest();
+		}
 		return NULL;
 	}
 
 	const types::Type* TypeChecking::visit(const SeqExp *e)
 	{
 		/*	check every expression in the sequence */
+		const ExpList* list = e->getList();
+
+		while (list != NULL) {
+			const Exp* head = list->getHead();
+			if (head != NULL)
+				visit(head);
+			list = list->getRest();
+		}
 		return NULL;
 	}
 
 	const types::Type* TypeChecking::visit(const AssignExp *e)
 	{
 		/* check both variable and expression */
+		const Var* var = e->getVar();
+
+		if (var != NULL)
+			visit(var);
+
+		const Exp* express = e->getExp();
+
+		if (express != NULL)
+			visit(express);
 		return NULL;
 	}
 
 	const types::Type* TypeChecking::visit(const IfExp *e)
 	{
 		/* check test condition, then-clause, and else-clause (if exists) */
+		const Exp* test = e->getTest();
+
+		if (test != NULL)
+			visit(test);
+
+		const Exp* thenC = e->getThenClause();
+
+		if (thenC != NULL)
+			visit(thenC);
+
+		const Exp* elseC = e->getElseClause();
+
+		if (elseC != NULL)
+			visit(elseC);
+		
 		return NULL;
 	}
 
 	const types::Type* TypeChecking::visit(const WhileExp *e)
 	{
 		/* check both the test condition and loop-body expression */
+		const Exp* test = e->getTest();
+
+		if (test != NULL)
+			visit(test);
+
+		const Exp* body = e->getBody();
+
+		if (body != NULL)
+			visit(body);
 		return NULL;
 	}
 
@@ -212,6 +305,22 @@ namespace semantics
 			step 2: check var declaration, upper bound expression, and loop-body
 			step 3: end the scope
 		*/
+		env.getVarEnv()->beginScope();
+		const VarDec* var = e->getVar();
+
+		if (var != NULL)
+			visit(var);
+
+		const Exp* hi = e->getHi();
+
+		if (hi != NULL)
+			visit(hi);
+
+		const Exp* body = e->getBody();
+
+		if (body != NULL)
+			visit(body);
+		env.getVarEnv()->endScope();
 		return NULL;
 	}
 
@@ -229,6 +338,24 @@ namespace semantics
 			step 3: check the body expression
 			step 4: end the scope for both symbol tables
 		*/
+		env.getVarEnv()->beginScope();
+		env.getTypeEnv()->beginScope();
+		const DecList* decs = e->getDecs();
+
+		while (decs != NULL) {
+			const Dec* head = decs->getHead();
+			if (head != NULL)
+				visit(head);
+			decs = decs->getRest();
+		}
+
+		const Exp* body = e->getBody();
+
+		if (body != NULL)
+			visit(body);
+		env.getVarEnv()->endScope();
+		env.getTypeEnv()->endScope();
+		
 		return NULL;
 	}
 
@@ -239,6 +366,24 @@ namespace semantics
 			step 2: check the size expression
 			step 3: check the initial expression
 		*/
+		string x;
+		stringstream stream(x);
+		string type = e->getType();
+
+		if (!env.getTypeEnv()->contains(type)) {
+			stream << "undefined array type";
+			error(e, stream.str());
+		}
+
+		const Exp* size = e->getSize();
+
+		if (size != NULL)
+			visit(size);
+
+		const Exp* init = e->getInit();
+
+		if (init != NULL)
+			visit(init);
 		return NULL;
 	}
 
@@ -249,6 +394,22 @@ namespace semantics
 			step 2: if the type information is provided, check the type
 			step 3: check the initial expression
 		*/
+		symbol::SymTabEntry* entry = new symbol::SymTabEntry;
+		entry->node = d;
+		entry->level = env.getVarEnv()->getLevel();
+		entry->info = NULL;
+
+		insertVar(d->getName(), *entry);
+
+		const NameTy* type = d->getType();
+
+		if (type != NULL)
+			visit(type);
+
+		const Exp* init = d->getInit();
+
+		if (init != NULL)
+			visit(init);
 		return NULL;
 	}
 
@@ -258,6 +419,21 @@ namespace semantics
 			step 1: insert the name of the new type to the type symbol table
 			step 2: check the type information of the new type
 		*/
+		const TypeDec* ptr = d;
+
+		while (ptr != NULL) {
+			symbol::SymTabEntry* entry = new symbol::SymTabEntry;
+			entry->node = d;
+			entry->level = env.getTypeEnv()->getLevel();
+			entry->info = NULL;
+
+			insertType(d->getName(), *entry);
+
+			const Ty* type = d->getTy();
+			if (type != NULL)
+				visit(type);
+			ptr = ptr->getNext();
+		}
 		return NULL;
 	}
 
@@ -267,6 +443,14 @@ namespace semantics
 		/*
 			step 1: check if the type name is defined by looking up the type symbol table
 		*/
+		string name;
+		stringstream stream(name);
+		string myName = t->getName();
+
+		if (!env.getTypeEnv()->contains(myName)) {
+			stream << "undefined type name";
+			error(t, stream.str());
+		}
 		return NULL;
 	}
 
@@ -276,6 +460,14 @@ namespace semantics
 		/*
 			step 1: Check the name of the array type by looking up the type symbol table
 		*/
+		string name;
+		stringstream stream(name);
+		string myName = t->getName();
+
+		if (!env.getTypeEnv()->contains(myName)) {
+			stream << "undefined array type name";
+			error(t, stream.str());
+		}
 		return NULL;
 	}
 

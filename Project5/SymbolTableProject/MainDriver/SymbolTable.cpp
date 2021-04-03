@@ -1,3 +1,8 @@
+/* Ruj Haan
+ * TypeChecking.cpp
+ * 4/7/21
+ * Dr. Zhijiang Dong
+ */
 #include <iostream>
 #include <sstream>
 
@@ -123,7 +128,12 @@ namespace symbol
 	bool SymbolTable<Entry>::contains(string lexeme)
 	{
 		/* put your implementation here */
-		return true;
+		for (Iterator it = tables.begin(); it != tables.end(); it++) {
+			HashTable currentHash = *it;
+			if (currentHash.end() != currentHash.find(lexeme))
+				return true;
+		}
+		return false;
 	}
 
 
@@ -131,15 +141,21 @@ namespace symbol
 	bool SymbolTable<Entry>::localContains(string lexeme)
 	{
 		/* put your implementation here */
-		return true;
+		Iterator it = tables.begin();
+		if (it->end() != it->find(lexeme))
+			return true;
+		return false;
+
 	}
 
 	//check if a lexeme is contained in the global level
 	template<class Entry>
 	bool SymbolTable<Entry>::globalContains(string lexeme)
 	{
-		/* put your implementation here */
-		return true;
+		Iterator it = tables.begin();
+		if (it->end() != t->find(lexeme))
+			return true;
+		return false;
 	}
 
 	//insert a lexeme and binder to the current scope, i.e. the first hashtable in the list
@@ -148,6 +164,15 @@ namespace symbol
 	void SymbolTable<Entry>::insert(string lexeme, const Entry value)
 	{
 		/* put your implementation here */
+		string data;
+		stringstream stream(data);
+
+		stream << "The id, " << lexeme << ", already exist in the scope." << endl;
+
+		Iterator currentI = tables.begin();
+		if (currentI->end() != currentI->find(lexeme))
+			throw stream.str();
+		currentI->insert({ lexeme, value });
 	}
 
 } //end of namespace Environment
