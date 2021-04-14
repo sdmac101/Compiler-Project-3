@@ -1,0 +1,83 @@
+/*Author: Ruj Haan*/
+
+let
+	var var1 := 1
+
+	function FUNC(i: int, j: string) =
+		let
+			var zz := 0
+		in
+			print("1")
+		end
+
+	var var2 : int := 1
+
+    /* test case 23, 24, 25, and 26 */
+	function FUNC(n: someType, n: int) : int = "string"
+
+	/* test case 28 */
+	var d : int := "string"
+	
+	/* test case 29 */
+	var e := nil
+
+	/* test case 1 */
+	wrongarray[1] of 1;
+
+    /* test case 2 */
+	intarray["exp"] of 1;
+
+in
+	/* test case 3 and 4 */
+	a := "This" + "That";
+
+	/* test case 5 */
+	if 1 = "one" then 1;
+
+    /* test case 6 */
+	if nil = "nil" then 1;
+	
+	/* test case 7 */
+	if nil = nil then 1;
+
+	/* test case 8 */
+	if "this" < nil then 1;
+
+	/* test case 9  */
+	if 1 >= "that" then 1;
+
+	/* test case 10 */
+	z(1);
+
+	/* test case 11 */
+	var1(2);
+
+	/* test case 12 */
+	FUNC(1, "one", 2, "two");
+	
+	/* test case 13 */
+	FUNC(1);
+	
+	/* test case 14 */
+	FUNC("one", "two");
+
+	/* test case 15 */
+	var2 := "string";
+
+	/* test case 16 */
+	if "one" then 1;
+	
+	/* test case 17 */
+	if 1 then "one";
+
+	/* test case 18 */
+	if 1 then 2 else "one";
+
+	/* test case 19 */
+	while 1 do "string";
+
+	/* test case 20, 21, and 22 */
+	for i := "one" to "one plus one" do "this"
+
+
+end
