@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -13,6 +13,8 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{54EED439-C13C-4EA6-986C-6D5D2A11625A}</ProjectGuid>
     <Keyword>MakeFileProj</Keyword>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -49,17 +51,15 @@
   <ItemGroup>
     <None Include="example.tig" />
     <None Include="readme.txt" />
-    <CustomBuild Include="tiger.ll">
-      <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\win_flex_bison-latest\win_flex  %(Identity)</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">lex.yy.cc</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="tiger.yy">
-      <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\win_flex_bison-latest\win_bison  -d %(Identity)</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">tiger.tab.cc tiger.tab.hh</Outputs>
-    </CustomBuild>
     <None Include="tiger.output" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="tiger.ll">
+      <FileType>Document</FileType>
+    </Compile>
+    <Compile Include="tiger.yy">
+      <FileType>Document</FileType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

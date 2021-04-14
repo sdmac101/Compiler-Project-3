@@ -1,0 +1,33 @@
+Report submited at 2020-04-005 11:00pm
+
+Role
+    Assignment Leader: George Boktor
+    Programmer       : Ruj Haan
+    Tester           : Sophie McIntyre
+
+Progress
+    George Boktor
+        Coordinated tester and programmer for final test report. Kept up with deadlines.
+    Sophie McIntyre
+        Compiled a test report on Alpha version
+    Ruj Haan
+        Used test report to modify Alpha version based on tester feedback
+
+Challenging Issues
+    N/A
+
+Work to be done
+    George Boktor
+        Plan out final team meeting and steps toward final version of project.
+    Ruj Haan
+        Make last minute changes to source code after consulting with Tester.
+    Sophie McIntyre
+        Help Programmer polish final code.
+
+Meet deadline
+    Ruj Haan
+        Will the developer(s) be able to finish and submit the work before the next
+	deadline?  If no, please explain why?      YES
+    Sophie McIntyre
+        Will the tester(s) be able to finish and submit the work before the next
+	deadline?  If no, please explain why?      YES

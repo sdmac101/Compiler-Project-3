@@ -1,0 +1,27 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workbench ActiveDocument="MainDriver/tiger.ll">
+    <Files>
+      <File FileName="MainDriver/main.cpp" Line="10" Column="17" />
+      <File FileName="MainDriver/tiger.ll" Line="32" Column="34" />
+      <File FileName="MainDriver/tiger.yy" Line="10" Column="23" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="BisonProject" expanded="True">
+            <Node name="FlexBisonTools" expanded="True">
+              <Node name="tiger.ll" selected="True" />
+            </Node>
+            <Node name="MainDriver" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|Win32" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

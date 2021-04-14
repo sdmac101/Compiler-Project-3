@@ -5,22 +5,53 @@
        column after you have designed all test cases successfully.
        
         Tiger Construct to be covered                         Line # of the statement
-        array type declaration
-        variable declaration
-        lvalue 
-        logic comparison expression
-        arithmetic expression
-        assignment expression
-        if-then-else expression 
-        while expression
-        for loop expression 
-        let expression
-        a sequence of expressions
-        array creation
-        Negation
-        operator precedence levels
+        array type declaration                                           33,34
+        variable declaration                                      27, 28, 29, 30, 31
+        lvalue                                                             48
+        logic comparison expression                                      45,46
+        arithmetic expression                                           39 - 43
+        assignment expression                                      27, 28, 29, 30, 31
+        if-then-else expression                                             52
+        while expression                                                     50
+        for loop expression                                                 51
+        let expression                                                      26
+        a sequence of expressions                                       39 - 43
+        array creation                                                      36
+        Negation                                                            31
+        operator precedence levels                                          41
  */
 
- Put your Tiger program here
+ /* Put your Tiger program here */
+
+ let
+    var num1 := 1
+    var i := 0
+    var str1 := " "
+    var str2 := "i"
+    var negNum := -1
+
+    type intArr = int
+    type arr = array of intArr
+
+    var arr1:arr := arr [5] of 1
+ in
+    1+1;
+    1+1+1;
+    1+1-1;
+    4/-5+1
+    1*1
+    1/1
+
+    10 >= 1
+    10 <= 1
+
+    arr1[0];
+
+    while i < 100 do (num1:=num1+1;())
+    for j:=0 to 100 do (num1=num1+1;());
+    if negNum < num1 then num1 := 0 else negNum := 0;
+ end
+
+    
  
 
